@@ -4,459 +4,310 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FONG YUNG · Chinese Takeaway</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
-
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-
-:root {
-  --red: #C62828;
-  --red-dark: #8E0000;
-  --gold: #D4A84B;
-  --gold-light: #F0D68A;
-  --cream: #FFF8F0;
-  --dark: #1A1A2E;
-  --gray: #6B7280;
-  --white: #FFFFFF;
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0f0e0b;
+  --paper:#f7f3ed;
+  --paper-warm:#efe9df;
+  --crimson:#ad1d2b;
+  --crimson-deep:#7a121d;
+  --gilt:#d4a23b;
+  --gilt-light:#e8c46a;
+  --gilt-glow:rgba(212,162,59,0.25);
+  --soot:rgba(15,14,11,0.06);
+  --soot-heavy:rgba(15,14,11,0.12);
+}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--cream);
-  color: var(--dark);
-  overflow-x: hidden;
+/* ─── NOISE OVERLAY ─── */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;
 }
 
 /* ─── HERO ─── */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--red-dark) 0%, var(--red) 50%, #B71C1C 100%);
-  overflow: hidden;
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--ink);
+  overflow:hidden;
 }
-
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
+.hero::before{
+  content:'';position:absolute;inset:0;
   background:
-    radial-gradient(circle at 20% 30%, rgba(212,168,75,0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(240,214,138,0.1) 0%, transparent 50%);
+    radial-gradient(ellipse 70% 50% at 30% 20%, rgba(212,162,59,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 60% at 70% 80%, rgba(173,29,43,0.06) 0%, transparent 70%);
 }
-
-.hero-pattern {
-  position: absolute;
-  inset: 0;
-  opacity: 0.03;
+.hero-pattern{
+  position:absolute;inset:0;
   background-image:
-    repeating-linear-gradient(45deg, var(--gold) 0px, var(--gold) 2px, transparent 2px, transparent 20px);
+    linear-gradient(rgba(212,162,59,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,162,59,0.04) 1px, transparent 1px);
+  background-size:60px 60px;
 }
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 2rem;
+.hero-content{position:relative;z-index:2;text-align:center;padding:2rem;}
+.hero-logo-frame{
+  width:200px;height:200px;margin:0 auto 2rem;
+  border-radius:50%;padding:6px;
+  background:conic-gradient(from 45deg, var(--gilt), var(--gilt-light), var(--gilt), var(--gilt-light), var(--gilt));
+  box-shadow:0 0 60px var(--gilt-glow);
+  animation:spin 12s linear infinite;
 }
-
-.hero-logo-img {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--gold);
-  box-shadow: 0 0 40px rgba(212,168,75,0.3);
-  margin-bottom: 1.5rem;
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-logo-frame img{
+  width:100%;height:100%;border-radius:50%;
+  object-fit:cover;display:block;
+  animation:spin-reverse 12s linear infinite;
 }
-
-.hero-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(4rem, 12vw, 8rem);
-  font-weight: 900;
-  color: var(--gold);
-  text-shadow: 0 4px 30px rgba(212,168,75,0.3);
-  letter-spacing: 4px;
-  line-height: 1;
+@keyframes spin-reverse{to{transform:rotate(-360deg)}}
+.hero-name{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(3.5rem,10vw,7rem);
+  color:var(--gilt);line-height:0.85;
+  letter-spacing:-0.02em;
+  text-shadow:0 2px 40px var(--gilt-glow);
 }
-
-.hero-chinese {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  color: var(--gold-light);
-  font-weight: 400;
-  letter-spacing: 8px;
-  margin-top: 0.3rem;
+.hero-chinese{
+  font-size:clamp(1.6rem,4vw,2.8rem);
+  color:var(--gilt-light);letter-spacing:0.3em;
+  margin-top:0.2rem;opacity:0.7;
 }
-
-.hero-tagline {
-  font-size: clamp(1rem, 2vw, 1.3rem);
-  color: var(--gold-light);
-  margin-top: 0.8rem;
-  font-weight: 400;
-  letter-spacing: 4px;
-  text-transform: uppercase;
+.hero-tag{
+  display:inline-block;
+  margin-top:1.5rem;
+  padding:0.4rem 1.8rem;
+  border:1px solid rgba(212,162,59,0.3);
+  border-radius:100px;
+  color:rgba(255,255,255,0.6);
+  font-size:clamp(0.75rem,1.2vw,0.9rem);
+  letter-spacing:0.15em;text-transform:uppercase;
 }
-
-.hero-sub {
-  color: rgba(255,255,255,0.8);
-  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
-  margin-top: 1.5rem;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.8;
+.hero-cta{
+  display:inline-block;margin-top:2.5rem;
+  padding:1rem 3rem;
+  background:var(--gilt);color:var(--ink);
+  font-weight:700;font-size:1.05rem;
+  border-radius:100px;text-decoration:none;
+  letter-spacing:0.05em;
+  transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
 }
-
-.hero-cta {
-  display: inline-block;
-  margin-top: 2.5rem;
-  padding: 1rem 3rem;
-  background: var(--gold);
-  color: var(--red-dark);
-  font-weight: 700;
-  font-size: 1.1rem;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  letter-spacing: 1px;
+.hero-cta:hover{transform:scale(1.06);box-shadow:0 12px 40px var(--gilt-glow);}
+.hero-scroll{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,0.2);
+  font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;
+  animation:bounce 2s ease-in-out infinite;
 }
-
-.hero-cta:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 40px rgba(212,168,75,0.4);
-}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
 
 /* ─── SECTION ─── */
-section {
-  padding: 5rem 1.5rem;
-  max-width: 1100px;
-  margin: 0 auto;
+section{padding:6rem 1.5rem;max-width:1200px;margin:0 auto;}
+.section-label{
+  display:block;text-align:center;
+  font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--crimson);font-weight:700;margin-bottom:0.5rem;
 }
-
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 0.5rem;
+.section-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2rem,4vw,3.2rem);
+  text-align:center;margin-bottom:0.75rem;
+  color:var(--ink);font-weight:400;
 }
-
-.section-subtitle {
-  text-align: center;
-  color: var(--gray);
-  font-size: 1.05rem;
-  margin-bottom: 3rem;
-}
-
-/* ─── MENU ─── */
-.menu-badge {
-  display: inline-block;
-  background: var(--red);
-  color: white;
-  padding: 0.25rem 1rem;
-  border-radius: 50px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 0.5rem;
+.section-sub{
+  text-align:center;color:rgba(15,14,11,0.5);
+  font-size:0.95rem;margin-bottom:4rem;max-width:450px;margin-left:auto;margin-right:auto;
 }
 
 /* ─── MENU FLYER ─── */
-.menu-flyer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-bottom: 3rem;
+.menu-flyer{
+  display:grid;grid-template-columns:1fr 1fr;gap:2rem;
+  margin-bottom:2rem;
 }
-
-@media (max-width: 768px) {
-  .menu-flyer { grid-template-columns: 1fr; }
+@media(max-width:768px){.menu-flyer{grid-template-columns:1fr}}
+.menu-flyer figure{
+  position:relative;border-radius:20px;overflow:hidden;
+  box-shadow:0 8px 40px var(--soot-heavy);
+  transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
 }
-
-.menu-flyer img {
-  width: 100%;
-  border-radius: 20px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
-
-.menu-flyer img:hover {
-  transform: scale(1.02);
+.menu-flyer figure:hover{transform:scale(1.02)}
+.menu-flyer img{width:100%;display:block;}
+.menu-flyer figcaption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:1.5rem;
+  background:linear-gradient(transparent,rgba(0,0,0,0.7));
+  color:white;font-size:0.85rem;font-weight:600;
 }
 
 /* ─── DEAL CARDS ─── */
-.deal-row {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 3rem;
+.deals{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--soot-heavy);border-radius:20px;overflow:hidden;
+  box-shadow:0 4px 24px var(--soot);
 }
-
-.deal-card {
-  background: white;
-  border-radius: 20px;
-  padding: 2.5rem 2rem;
-  text-align: center;
-  flex: 1;
-  min-width: 250px;
-  max-width: 350px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
-  position: relative;
+@media(max-width:600px){.deals{grid-template-columns:1fr}}
+.deal-card{
+  background:white;padding:3rem 2rem;text-align:center;
+  position:relative;transition:all 0.3s;
 }
-
-.deal-card:hover {
-  border-color: var(--gold);
-  transform: translateY(-5px);
+.deal-card:hover{background:var(--paper-warm);}
+.deal-card:first-child{border-right:1px solid var(--soot);}
+@media(max-width:600px){.deal-card:first-child{border-right:none;border-bottom:1px solid var(--soot);}}
+.deal-badge{
+  display:inline-block;
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+  padding:0.25rem 0.8rem;border-radius:100px;
+  margin-bottom:1rem;
 }
-
-.deal-card.popular {
-  border-color: var(--gold);
-  background: linear-gradient(180deg, #FFFDF5 0%, white 100%);
+.deal-badge.regular{background:var(--paper-warm);color:var(--ink);}
+.deal-badge.popular{background:var(--crimson);color:white;}
+.deal-size{
+  font-family:'DM Serif Display',serif;
+  font-size:1.6rem;color:var(--ink);font-weight:400;
 }
-
-.deal-card.popular::before {
-  content: '★ BEST SELLER';
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--gold);
-  color: var(--red-dark);
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.3rem 1rem;
-  border-radius: 50px;
-  letter-spacing: 2px;
+.deal-price{
+  font-family:'DM Serif Display',serif;
+  font-size:3.5rem;color:var(--crimson);margin:0.5rem 0;
 }
-
-.deal-size {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--red);
+.deal-price sup{font-size:1.5rem;vertical-align:super;}
+.deal-desc{color:rgba(15,14,11,0.5);font-size:0.9rem;line-height:1.6;}
+.deal-extras{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  margin-top:2rem;padding-top:2rem;
+  border-top:1px solid var(--soot);
 }
-
-.deal-price {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 3rem;
-  font-weight: 700;
-  margin: 0.5rem 0;
-  color: var(--dark);
+.deal-extra{
+  text-align:center;
+  padding:0.5rem 1.2rem;
+  background:var(--paper);border-radius:12px;
 }
-
-.deal-desc {
-  color: var(--gray);
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-.deal-divider {
-  width: 40px;
-  height: 3px;
-  background: var(--gold);
-  margin: 1rem auto;
-  border-radius: 2px;
-}
+.deal-extra .price{font-weight:800;font-size:1.1rem;color:var(--ink);}
+.deal-extra .label{font-size:0.75rem;color:rgba(15,14,11,0.4);margin-top:0.15rem;}
 
 /* ─── LUNCH COMBO ─── */
-.lunch-combo-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-top: 3rem;
+.lunch-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:2rem;
 }
-
-@media (max-width: 768px) {
-  .lunch-combo-grid { grid-template-columns: 1fr; }
+@media(max-width:768px){.lunch-grid{grid-template-columns:1fr}}
+.lunch-card{
+  background:white;border-radius:20px;padding:2.5rem 2rem;text-align:center;
+  box-shadow:0 4px 24px var(--soot);
+  border:1px solid transparent;
+  transition:all 0.3s;
 }
-
-.combo-card {
-  background: white;
-  border-radius: 20px;
-  padding: 2rem;
-  text-align: center;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+.lunch-card:hover{border-color:var(--gilt);}
+.lunch-number{
+  font-family:'DM Serif Display',serif;
+  font-size:5rem;line-height:0.8;
+  background:linear-gradient(135deg,var(--crimson),#5c0e16);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
 }
-
-.combo-number {
-  font-size: 4rem;
-  font-weight: 900;
-  color: var(--red);
-  line-height: 1;
-  font-family: 'Playfair Display', serif;
+.lunch-desc{margin:1rem 0 1.5rem;font-size:0.95rem;color:rgba(15,14,11,0.6);line-height:1.6;}
+.lunch-price{
+  font-family:'DM Serif Display',serif;
+  font-size:2.2rem;color:var(--crimson);
+  display:inline-block;padding:0.3rem 1.5rem;
+  background:var(--paper-warm);border-radius:100px;
 }
+.lunch-upgrade{text-align:center;margin-top:1.5rem;font-size:0.85rem;color:rgba(15,14,11,0.4);}
+.lunch-upgrade strong{color:var(--ink);}
 
-.combo-desc {
-  margin: 0.5rem 0 1rem;
-  font-size: 1rem;
-  color: var(--dark);
-  line-height: 1.6;
+/* ─── MENU LIST ─── */
+.menu-layout{
+  display:grid;grid-template-columns:1.2fr 0.8fr;gap:2rem;
 }
-
-.combo-price {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--red);
-  background: var(--gold-light);
-  display: inline-block;
-  padding: 0.3rem 1.5rem;
-  border-radius: 50px;
+@media(max-width:768px){.menu-layout{grid-template-columns:1fr}}
+.menu-block{
+  background:white;border-radius:20px;padding:2rem;
+  box-shadow:0 4px 24px var(--soot);
 }
-
-.combo-upgrade {
-  margin-top: 0.8rem;
-  font-size: 0.85rem;
-  color: var(--gray);
+.menu-block h3{
+  font-family:'DM Serif Display',serif;
+  font-size:1.3rem;margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:0.5rem;
 }
-
-/* ─── MENU ITEMS ─── */
-.menu-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-top: 3rem;
+.menu-block h3::after{
+  content:'';flex:1;height:1px;background:var(--soot);
 }
-
-@media (max-width: 768px) {
-  .menu-grid { grid-template-columns: 1fr; }
+.menu-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0.7rem 0;border-bottom:1px solid var(--soot);
 }
-
-.menu-card {
-  background: white;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  transition: transform 0.3s ease;
+.menu-row:last-child{border-bottom:none}
+.menu-row .name{font-weight:500;font-size:0.95rem;}
+.menu-row .pricing{
+  font-family:'DM Serif Display',serif;
+  font-size:0.85rem;color:rgba(15,14,11,0.4);
 }
-
-.menu-card:hover {
-  transform: translateY(-4px);
+.entree-list{display:flex;flex-direction:column;gap:0.6rem;}
+.entree-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0.8rem 1rem;
+  background:var(--paper);border-radius:12px;
 }
-
-.menu-card-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--red);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.menu-card-title .price {
-  margin-left: auto;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1.2rem;
-  color: var(--dark);
-  background: var(--gold-light);
-  padding: 0.2rem 0.8rem;
-  border-radius: 50px;
-}
-
-.menu-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid #f0ebe4;
-}
-
-.menu-item:last-child { border-bottom: none; }
-
-.menu-item-name {
-  font-weight: 500;
-  font-size: 0.95rem;
+.entree-item .name{font-weight:500;font-size:0.9rem;}
+.entree-item .pricing{
+  font-family:'DM Serif Display',serif;
+  font-size:0.85rem;color:rgba(15,14,11,0.4);
 }
 
 /* ─── SONG SECTION ─── */
-.song-section {
-  background: linear-gradient(135deg, var(--red-dark), var(--red));
-  border-radius: 24px;
-  padding: 3rem;
-  margin-top: 3rem;
-  color: white;
-  text-align: center;
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
+.song-wrapper{
+  max-width:1200px;margin:0 auto;padding:0 1.5rem;
 }
-
-.song-section .section-title { color: var(--gold); }
-.song-section .section-subtitle { color: rgba(255,255,255,0.7); }
-
-.song-card {
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 2rem;
-  margin-bottom: 1.5rem;
-  border: 1px solid rgba(255,255,255,0.15);
+.song-section{
+  background:var(--ink);border-radius:24px;padding:4rem 2.5rem;
+  position:relative;overflow:hidden;
 }
-
-.song-card h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
-  color: var(--gold);
-  margin-bottom: 0.8rem;
+.song-section::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 50% 40% at 20% 30%, rgba(212,162,59,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(173,29,43,0.04) 0%, transparent 60%);
+  pointer-events:none;
 }
-
-.song-card .lyrics {
-  font-size: 0.9rem;
-  line-height: 1.8;
-  color: rgba(255,255,255,0.85);
-  font-style: italic;
-  max-height: 180px;
-  overflow-y: auto;
+.song-section .section-title{color:var(--gilt);}
+.song-section .section-sub{color:rgba(255,255,255,0.4);}
+.song-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:16px;padding:1.5rem 2rem;margin-bottom:1rem;
+  backdrop-filter:blur(8px);
+  transition:all 0.3s;
 }
-
-.song-card .lyrics::-webkit-scrollbar { width: 4px; }
-.song-card .lyrics::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+.song-card:hover{background:rgba(255,255,255,0.07);}
+.song-card h3{
+  font-family:'DM Serif Display',serif;
+  color:var(--gilt);font-size:1.1rem;margin-bottom:0.5rem;
+}
+.song-card .lyrics{
+  font-size:0.85rem;line-height:1.8;color:rgba(255,255,255,0.6);
+  max-height:140px;overflow-y:auto;
+}
+.song-card .lyrics::-webkit-scrollbar{width:3px;}
+.song-card .lyrics::-webkit-scrollbar-thumb{background:var(--gilt);border-radius:4px;}
 
 /* ─── FOOTER ─── */
-.footer {
-  background: var(--dark);
-  color: rgba(255,255,255,0.7);
-  text-align: center;
-  padding: 3rem 1.5rem;
-  font-size: 0.85rem;
-  line-height: 1.8;
+.footer{
+  background:var(--ink);border-top:1px solid rgba(255,255,255,0.05);
+  text-align:center;padding:3rem 1.5rem;
+  color:rgba(255,255,255,0.25);font-size:0.8rem;line-height:2;
 }
+.footer .brand{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--gilt);}
+.footer .chinese{color:rgba(212,162,59,0.6);font-size:1.1rem;}
 
-.footer .brand {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  color: var(--gold);
-  margin-bottom: 0.5rem;
-}
-
-/* ─── ANIMATIONS ─── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-up {
-  animation: fadeUp 0.8s ease forwards;
-  opacity: 0;
-}
-
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
-
-@media (max-width: 480px) {
-  section { padding: 3rem 1rem; }
-  .song-section { padding: 2rem 1rem; border-radius: 16px; }
-}
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(20px);transition:all 0.8s cubic-bezier(0.22,1,0.36,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
 </style>
 </head>
 <body>
@@ -465,144 +316,135 @@ section {
 <section class="hero">
   <div class="hero-pattern"></div>
   <div class="hero-content">
-    <img src="assets/logo.jpg" alt="FONG YUNG Logo" class="hero-logo-img fade-up">
-    <div class="hero-logo fade-up">FONG YUNG</div>
-    <div class="hero-chinese fade-up delay-1">凤 雍 厨</div>
-    <div class="hero-tagline fade-up delay-1">Chinese Takeaway</div>
-    <p class="hero-sub fade-up delay-2">
-      Hot from the wok · Fresh & Fast<br>
-      Flavour built to last
-    </p>
-    <a href="#menu" class="hero-cta fade-up delay-3">View Menu ↓</a>
+    <div class="hero-logo-frame reveal">
+      <img src="assets/logo.jpg" alt="FONG YUNG">
+    </div>
+    <div class="hero-name reveal" style="transition-delay:0.1s">FONG YUNG</div>
+    <div class="hero-chinese reveal" style="transition-delay:0.2s">凤 雍</div>
+    <div class="hero-tag reveal" style="transition-delay:0.3s">Chinese Takeaway · Sydney</div>
+    <a href="#menu" class="hero-cta reveal" style="transition-delay:0.4s">Explore Menu ↓</a>
   </div>
+  <div class="hero-scroll">Scroll</div>
 </section>
 
-<!-- ═══ MENU PHOTOS ═══ -->
+<!-- ═══ MENU ═══ -->
 <section id="menu">
-  <div class="menu-badge" style="display:block;width:fit-content;margin:0 auto 1rem;">Our Menu</div>
-  <h2 class="section-title">Freshly Cooked to Order</h2>
-  <p class="section-subtitle">7 days a week · Takeaway & Delivery</p>
+  <span class="section-label reveal">Fresh Daily</span>
+  <h2 class="section-title reveal">The Menu</h2>
+  <p class="section-sub reveal">Traditional flavours, wok-fresh, made to order</p>
 
   <div class="menu-flyer">
-    <img src="assets/all-day-meals.jpg" alt="All Day Meals Menu" class="fade-up">
-    <img src="assets/lunch-combo.jpg" alt="Lunch Combo Menu" class="fade-up delay-1">
-  </div>
-</section>
-
-<!-- ═══ ALL DAY MEALS ═══ -->
-<section>
-  <div class="menu-badge" style="display:block;width:fit-content;margin:0 auto 1rem;">All Day Meals</div>
-
-  <div class="deal-row">
-    <div class="deal-card fade-up">
-      <div class="deal-size">Regular</div>
-      <div class="deal-price">$13.50</div>
-      <div class="deal-divider"></div>
-      <div class="deal-desc">2 Choices<br>with Rice or Noodles</div>
-    </div>
-
-    <div class="deal-card popular fade-up delay-1">
-      <div class="deal-size">Large</div>
-      <div class="deal-price">$16.50</div>
-      <div class="deal-divider"></div>
-      <div class="deal-desc">3 Choices<br>with Rice or Noodles</div>
-    </div>
+    <figure class="reveal">
+      <img src="assets/all-day-meals.jpg" alt="All Day Meals" loading="lazy">
+      <figcaption>All Day Meals</figcaption>
+    </figure>
+    <figure class="reveal" style="transition-delay:0.15s">
+      <img src="assets/lunch-combo.jpg" alt="Lunch Combo" loading="lazy">
+      <figcaption>Lunch Combo</figcaption>
+    </figure>
   </div>
 
-  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;">
-    <div style="background:white;border-radius:12px;padding:0.8rem 1.5rem;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.05);">
-      <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.1rem;">$8</div>
-      <div style="font-size:0.8rem;color:var(--gray);">Only Fried Rice<br><span style="font-size:0.7rem;">Regular</span></div>
+  <div class="deals reveal">
+    <div class="deal-card">
+      <span class="deal-badge regular">Regular</span>
+      <div class="deal-size">All Day Meal</div>
+      <div class="deal-price">$13<sup>.50</sup></div>
+      <div class="deal-desc">2 choices · Rice or Noodles</div>
     </div>
-    <div style="background:white;border-radius:12px;padding:0.8rem 1.5rem;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.05);">
-      <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.1rem;">$10</div>
-      <div style="font-size:0.8rem;color:var(--gray);">Only Noodles<br><span style="font-size:0.7rem;">Large</span></div>
+    <div class="deal-card">
+      <span class="deal-badge popular">★ Most Popular</span>
+      <div class="deal-size">Large Meal</div>
+      <div class="deal-price">$16<sup>.50</sup></div>
+      <div class="deal-desc">3 choices · Rice or Noodles</div>
     </div>
   </div>
 
-  <p class="menu-note" style="margin-top:1.5rem;max-width:400px;margin-left:auto;margin-right:auto;padding:0.8rem 1rem;background:#fff3e0;border-radius:10px;font-size:0.85rem;color:var(--gray);text-align:center;">
-    * No rice or noodles — $1 extra
-  </p>
+  <div class="deal-extras reveal">
+    <div class="deal-extra"><div class="price">$8</div><div class="label">Fried Rice Only</div></div>
+    <div class="deal-extra"><div class="price">$10</div><div class="label">Noodles Only</div></div>
+    <div class="deal-extra"><div class="price">+$1</div><div class="label">No Rice/Noodles</div></div>
+  </div>
 </section>
 
 <!-- ═══ LUNCH COMBO ═══ -->
 <section>
-  <div class="menu-badge" style="display:block;width:fit-content;margin:0 auto 1rem;">Lunch Special</div>
-  <h2 class="section-title">Lunch Combo</h2>
-  <p class="section-subtitle">Includes can drink or water</p>
+  <span class="section-label reveal">Lunch Special</span>
+  <h2 class="section-title reveal">Lunch Combo</h2>
+  <p class="section-sub reveal">Includes can drink or water</p>
 
-  <div class="lunch-combo-grid">
-    <div class="combo-card fade-up">
-      <div class="combo-number">2</div>
-      <div class="combo-desc">Choices with Fried Rice + Spring Roll + Can or Water</div>
-      <div class="combo-price">$18.90</div>
+  <div class="lunch-grid">
+    <div class="lunch-card reveal">
+      <div class="lunch-number">2</div>
+      <div class="lunch-desc">Choices + Fried Rice + Spring Roll + Drink</div>
+      <div class="lunch-price">$18.90</div>
     </div>
-    <div class="combo-card fade-up delay-1">
-      <div class="combo-number">3</div>
-      <div class="combo-desc">Choices with Fried Rice + Dim Sim + Can or Water</div>
-      <div class="combo-price">$20.90</div>
+    <div class="lunch-card reveal" style="transition-delay:0.15s">
+      <div class="lunch-number">3</div>
+      <div class="lunch-desc">Choices + Fried Rice + Dim Sim + Drink</div>
+      <div class="lunch-price">$20.90</div>
     </div>
   </div>
-  <p class="combo-upgrade" style="text-align:center;margin-top:1rem;">
-    Upgrade to any bottle drink <strong>$1.50</strong> extra
-  </p>
+  <p class="lunch-upgrade reveal">Upgrade to bottled drink <strong>+$1.50</strong></p>
 </section>
 
-<!-- ═══ MENU ITEMS ═══ -->
+<!-- ═══ MENU LIST ═══ -->
 <section>
-  <div class="menu-badge" style="display:block;width:fit-content;margin:0 auto 1rem;">Main Selection</div>
-  <h2 class="section-title">Choose Your Flavours</h2>
-  <p class="section-subtitle">Pick 2 or 3 for your combo</p>
+  <span class="section-label reveal">Choose Your Flavours</span>
+  <h2 class="section-title reveal">Mains & Entrees</h2>
+  <p class="section-sub reveal">All available for your combo</p>
 
-  <div class="menu-grid">
-    <div class="menu-card fade-up">
-      <div class="menu-card-title">🥘 Mains</div>
-      <div class="menu-item"><span class="menu-item-name">Fried Rice</span></div>
-      <div class="menu-item"><span class="menu-item-name">Honey Chicken</span></div>
-      <div class="menu-item"><span class="menu-item-name">Sweet & Sour Pork</span></div>
-      <div class="menu-item"><span class="menu-item-name">Teriyaki Chicken</span></div>
-      <div class="menu-item"><span class="menu-item-name">Mongolian Beef</span></div>
-      <div class="menu-item"><span class="menu-item-name">Chicken Vegetable</span></div>
-      <div class="menu-item"><span class="menu-item-name">Omelette</span></div>
-      <div class="menu-item"><span class="menu-item-name">Black Bean Beef</span></div>
-      <div class="menu-item"><span class="menu-item-name">Chicken Chow Mein</span></div>
-      <div class="menu-item"><span class="menu-item-name">Stir Fried Noodles</span></div>
+  <div class="menu-layout">
+    <div class="menu-block reveal">
+      <h3>Mains</h3>
+      <div class="menu-row"><span class="name">Fried Rice</span></div>
+      <div class="menu-row"><span class="name">Honey Chicken</span></div>
+      <div class="menu-row"><span class="name">Sweet & Sour Pork</span></div>
+      <div class="menu-row"><span class="name">Teriyaki Chicken</span></div>
+      <div class="menu-row"><span class="name">Mongolian Beef</span></div>
+      <div class="menu-row"><span class="name">Chicken Vegetable</span></div>
+      <div class="menu-row"><span class="name">Omelette</span></div>
+      <div class="menu-row"><span class="name">Black Bean Beef</span></div>
+      <div class="menu-row"><span class="name">Chicken Chow Mein</span></div>
+      <div class="menu-row"><span class="name">Stir Fried Noodles</span></div>
     </div>
 
-    <div class="menu-card fade-up delay-1">
-      <div class="menu-card-title">🥟 Entrees</div>
-      <div class="menu-item" style="flex-direction:column;align-items:flex-start;">
-        <span class="menu-item-name">Spring Rolls</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--gray);">1 for $1.80 · 3 for $5</span>
-      </div>
-      <div class="menu-item" style="flex-direction:column;align-items:flex-start;">
-        <span class="menu-item-name">Steam Dim Sim</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--gray);">1 for $2.20 · 3 for $6.50</span>
-      </div>
-      <div class="menu-item">
-        <span class="menu-item-name">Potato Scallops</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--gray);">$2.50 each</span>
-      </div>
-      <div class="menu-item">
-        <span class="menu-item-name">Honey Chicken Skewers</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--gray);">$5 each</span>
-      </div>
-      <div class="menu-item" style="flex-direction:column;align-items:flex-start;">
-        <span class="menu-item-name">Fried Pork Dim Sim</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--gray);">1 for $2.20 · 3 for $6.50</span>
+    <div class="menu-block reveal" style="transition-delay:0.15s">
+      <h3>Entrees</h3>
+      <div class="entree-list">
+        <div class="entree-item">
+          <span class="name">Spring Rolls</span>
+          <span class="pricing">1/$1.80 · 3/$5</span>
+        </div>
+        <div class="entree-item">
+          <span class="name">Steam Dim Sim</span>
+          <span class="pricing">1/$2.20 · 3/$6.50</span>
+        </div>
+        <div class="entree-item">
+          <span class="name">Potato Scallops</span>
+          <span class="pricing">$2.50 each</span>
+        </div>
+        <div class="entree-item">
+          <span class="name">Honey Chicken Skewers</span>
+          <span class="pricing">$5 each</span>
+        </div>
+        <div class="entree-item">
+          <span class="name">Fried Pork Dim Sim</span>
+          <span class="pricing">1/$2.20 · 3/$6.50</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ SONG SECTION ═══ -->
-<div style="max-width:1100px;margin:0 auto;padding:0 1.5rem;">
+<!-- ═══ SONGS ═══ -->
+<div class="song-wrapper">
   <div class="song-section">
-    <h2 class="section-title">🎵 The Fong Yung Anthem</h2>
-    <p class="section-subtitle">Original music by Philip Wong</p>
+    <span class="section-label reveal" style="color:rgba(212,162,59,0.5);">Original</span>
+    <h2 class="section-title reveal">🎵 The Fong Yung Anthem</h2>
+    <p class="section-sub reveal">Three tracks · by Philip Wong</p>
 
-    <div class="song-card">
-      <h3>🎵 Song 1: The Order Rap</h3>
+    <div class="song-card reveal">
+      <h3>01 · The Order Rap</h3>
       <div class="lyrics">
 Welcome to Fong Yung, new menu dropped<br>
 You want it fast? Listen to the blast, go!<br>
@@ -612,46 +454,30 @@ Teriyaki chicken and Mongolian beef<br>
 Chicken vegetable, given hunger relief<br>
 Fluffy omelette, black bean, beef in the pan<br>
 Chicken chow mein, stir-fried noodles, man<br><br>
-Hit the entrees, next, spring rolls on the line<br>
-One for $1.80 or three for $5, sublime<br>
-Steam dim sim, $2.20 each, three for $6.50<br>
-Potato scallops, $2.50 each, gold and crisp<br>
-$5 chicken skewer's a flavour you can't miss<br><br>
 Yo, the new menu is crazy, I love the upgrade<br>
-Now listen to my order, exactly how it's made<br>
 Gimme Mongolian beef, pile it up on the side<br>
 With that stir-fried noodles that the flavours collide<br>
 Add the sweet and sour pork, scoop it heavy and hot<br>
-This is exactly the combination that I want<br><br>
-Three spring rolls, put 'em in a paper bag<br>
-Three fried pork dim sim, separate box for the treat<br>
-And two chicken skewers, man, I'm ready to eat<br>
-Pack it up tight, snap the lid on the top<br>
-With this Fong Yung feast, the flavour's never gonna drop<br>
-You know how to order, my friend, packed and ready<br>
-Let's dig in!
+This is exactly the combination that I want
       </div>
     </div>
 
-    <div class="song-card">
-      <h3>🎵 Fong Yung Theme</h3>
+    <div class="song-card reveal" style="transition-delay:0.1s">
+      <h3>02 · Fong Yung Theme</h3>
       <div class="lyrics">
 Yeah, you know the deal<br>
 Regular size, only $13.50<br>
 Two big choices with the rice or the noodles<br>
 Tastes so good, yeah, we love it<br>
-Oodles, hot and fresh, doing it right<br>
 Hot from the wok, spring rolls frying<br>
 See the boss lady smile, and there's no denying<br><br>
-That all day meal, yeah, you know the deal<br>
-$13.50, what a beautiful sight<br>
-Fong Yung, takeaway, tasty and bright<br><br>
+Fong Yung, takeaway, tasty and bright<br>
 Fong Yung, Fong Yung, Fong Yung, Fong Yung
       </div>
     </div>
 
-    <div class="song-card">
-      <h3>🎵 Hot from the Wok</h3>
+    <div class="song-card reveal" style="transition-delay:0.2s">
+      <h3>03 · Hot from the Wok</h3>
       <div class="lyrics">
 Hot from the wok, taking round the clock<br>
 Fong Yung, takeaway, brightening up your day<br>
@@ -665,28 +491,21 @@ Fong Yung, Fong Yung
 <!-- ═══ FOOTER ═══ -->
 <footer class="footer">
   <div class="brand">FONG YUNG</div>
-  <div style="font-size:1.2rem;color:var(--gold-light);margin-bottom:0.5rem;">凤雍厨</div>
+  <div class="chinese">凤雍</div>
   <p>Chinese Takeaway</p>
-  <p style="margin-top:1rem;font-size:0.75rem;">🎵 Original songs by Philip Wong</p>
-  <p style="font-size:0.75rem;">Site made with ❤️ by Daisy</p>
+  <p style="margin-top:1rem;">🎵 Original songs by Philip Wong</p>
+  <p>Site by Daisy ❤️</p>
 </footer>
 
 <script>
+// Scroll reveal
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-    }
+    if(entry.isIntersecting) entry.target.classList.add('visible');
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll('.fade-up').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(30px)';
-  el.style.transition = 'all 0.8s ease';
-  observer.observe(el);
-});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
