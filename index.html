@@ -3,105 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FONG YUNG · Chinese Takeaway</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<title>FONG YUNG · Chinese Takeaway Stafford</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --red:#da291c;
-  --red-dark:#b51a0e;
-  --red-bg:#fef2f0;
-  --gold:#f0b34b;
-  --gold-light:#fce4b2;
-  --cream:#fffaf5;
-  --warm:#fdf6ee;
-  --ink:#2d2a24;
-  --gray:#8a847b;
-  --light-gray:#e8e2d9;
-  --shadow:rgba(45,42,36,0.06);
+  --bg:#faf8f5;
+  --white:#fff;
+  --ink:#1d1b18;
+  --ink-light:#5c5750;
+  --red:#c53030;
+  --red-light:#fef2f2;
+  --gold:#d69e3c;
+  --border:#e8e4de;
+  --shadow:0 2px 16px rgba(29,27,24,0.05);
 }
 body{
-  font-family:'Nunito',sans-serif;
-  background:var(--cream);
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
   color:var(--ink);
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
 
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(250,248,245,0.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-brand{
+  display:flex;align-items:center;gap:0.75rem;
+  font-weight:700;font-size:1.1rem;
+}
+.nav-brand img{width:36px;height:36px;border-radius:50%;object-fit:cover;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{
+  text-decoration:none;color:var(--ink-light);
+  font-size:0.85rem;font-weight:500;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--red);}
+
 /* ─── HERO ─── */
 .hero{
-  position:relative;min-height:92vh;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(180deg,var(--red-dark) 0%,var(--red) 50%,#b81f14 100%);
-  overflow:hidden;
+  margin-top:64px;
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:calc(100vh - 64px);
 }
-.hero-pattern{
-  position:absolute;inset:0;
-  background-image:radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(240,179,75,0.06) 0%, transparent 50%);
+@media(max-width:800px){.hero{grid-template-columns:1fr;}}
+.hero-left{
+  padding:4rem 3rem;
+  display:flex;flex-direction:column;justify-content:center;
 }
-.hero-content{position:relative;z-index:2;text-align:center;padding:2rem;}
-
-.logo-wrap{
-  width:160px;height:160px;margin:0 auto 1.5rem;
-  border-radius:50%;padding:5px;
-  background:var(--gold);
-  box-shadow:0 0 30px rgba(240,179,75,0.3);
-}
-.logo-wrap img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;}
-
+.hero-logo{width:100px;height:100px;border-radius:50%;object-fit:cover;margin-bottom:1.5rem;}
 .hero-name{
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(3.2rem,10vw,6rem);
-  color:white;line-height:0.85;
-  letter-spacing:-0.02em;
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.5rem,5vw,4rem);
+  line-height:1;
 }
 .hero-chinese{
-  font-size:clamp(1.4rem,3.5vw,2.5rem);
-  color:var(--gold-light);
-  letter-spacing:0.4em;
-  margin-top:0.2rem;opacity:0.8;
+  font-size:clamp(1.4rem,2.5vw,2rem);
+  color:var(--ink-light);margin-top:0.3rem;
+  letter-spacing:0.3em;
 }
-.hero-tag{
-  display:inline-block;
-  margin-top:1.2rem;
-  padding:0.35rem 1.5rem;
-  background:rgba(255,255,255,0.1);
-  border-radius:100px;
-  color:rgba(255,255,255,0.8);
-  font-size:0.85rem;font-weight:600;
-  letter-spacing:0.08em;
-}
-.hero-hours{
-  color:rgba(255,255,255,0.5);
-  font-size:0.8rem;margin-top:0.8rem;
+.hero-desc{
+  color:var(--ink-light);font-size:1rem;
+  margin:1.5rem 0;line-height:1.7;max-width:420px;
 }
 .hero-cta{
-  display:inline-block;margin-top:2rem;
-  padding:1rem 3rem;
-  background:var(--gold);color:var(--red-dark);
-  font-weight:800;font-size:1.05rem;
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:1rem 2rem;
+  background:var(--red);color:white;
+  font-weight:600;font-size:1rem;
   border-radius:100px;text-decoration:none;
-  transition:all 0.25s;
+  width:fit-content;transition:all 0.25s;
 }
-.hero-cta:hover{transform:scale(1.05);box-shadow:0 8px 30px rgba(240,179,75,0.4);}
+.hero-cta:hover{background:#a02828;transform:translateY(-2px);}
+.hero-right{
+  position:relative;overflow:hidden;
+  background:var(--red-light);
+}
+.hero-right img{
+  width:100%;height:100%;object-fit:cover;
+}
+.hero-badge{
+  position:absolute;bottom:2rem;left:2rem;
+  background:white;border-radius:12px;
+  padding:1rem 1.2rem;box-shadow:var(--shadow);
+  display:flex;gap:1.5rem;
+}
+.hero-badge div{text-align:center;}
+.hero-badge .num{font-weight:700;font-size:1.3rem;color:var(--red);}
+.hero-badge .lbl{font-size:0.7rem;color:var(--ink-light);margin-top:0.1rem;}
 
 /* ─── SECTION ─── */
-section{padding:4rem 1.5rem;max-width:1000px;margin:0 auto;}
+section{padding:5rem 2rem;max-width:1100px;margin:0 auto;}
 .section-label{
-  display:block;text-align:center;
-  font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;
-  color:var(--gray);font-weight:700;margin-bottom:0.3rem;
+  display:block;
+  font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--red);font-weight:600;margin-bottom:0.3rem;
 }
 .section-title{
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(1.8rem,4vw,2.8rem);
-  text-align:center;
-  color:var(--ink);font-weight:400;
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:700;margin-bottom:0.5rem;
 }
 .section-sub{
-  text-align:center;color:var(--gray);
-  font-size:0.9rem;margin-top:0.5rem;margin-bottom:2.5rem;
+  color:var(--ink-light);font-size:0.95rem;
+  margin-bottom:3rem;max-width:500px;
 }
 
 /* ─── MENU FLYER ─── */
@@ -111,263 +123,293 @@ section{padding:4rem 1.5rem;max-width:1000px;margin:0 auto;}
 @media(max-width:700px){.menu-flyer{grid-template-columns:1fr}}
 .menu-flyer figure{
   border-radius:16px;overflow:hidden;
-  box-shadow:0 4px 20px var(--shadow);
-  background:white;
+  box-shadow:var(--shadow);background:var(--white);
   transition:transform 0.3s;
 }
 .menu-flyer figure:hover{transform:translateY(-4px)}
 .menu-flyer img{width:100%;display:block;}
 .menu-flyer figcaption{
-  padding:0.8rem 1rem;
-  font-weight:700;font-size:0.85rem;
-  color:var(--ink);
-  border-top:1px solid var(--light-gray);
+  padding:1rem;font-weight:600;font-size:0.9rem;
+  border-top:1px solid var(--border);
 }
 
 /* ─── DEALS ─── */
-.deals{
-  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
-  margin-bottom:1.5rem;
-}
+.deals{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
 @media(max-width:600px){.deals{grid-template-columns:1fr}}
 .deal-card{
-  background:white;border-radius:16px;padding:2rem 1.5rem;text-align:center;
-  box-shadow:0 4px 20px var(--shadow);
-  border:2px solid transparent;
-  transition:all 0.25s;
-  position:relative;
+  background:var(--white);border-radius:16px;padding:2.5rem 2rem;text-align:center;
+  box-shadow:var(--shadow);border:2px solid transparent;
+  transition:all 0.25s;position:relative;
 }
 .deal-card:hover{border-color:var(--gold);}
 .deal-card.popular{border-color:var(--gold);}
-.deal-card.popular .badge{
-  position:absolute;top:-10px;left:50%;transform:translateX(-50%);
-  background:var(--gold);color:var(--red-dark);font-size:0.6rem;font-weight:800;
-  padding:0.2rem 0.8rem;border-radius:100px;letter-spacing:0.1em;text-transform:uppercase;
+.deal-card.popular .tag{
+  position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  background:var(--gold);color:white;font-size:0.6rem;font-weight:700;
+  padding:0.25rem 0.8rem;border-radius:100px;letter-spacing:0.1em;text-transform:uppercase;
 }
-.deal-name{font-weight:800;font-size:1.1rem;color:var(--red);}
+.deal-name{font-weight:700;font-size:1.1rem;color:var(--ink);}
 .deal-price{
-  font-family:'DM Serif Display',serif;
-  font-size:3rem;margin:0.3rem 0;
-  color:var(--ink);
+  font-family:'Playfair Display',serif;
+  font-size:3rem;margin:0.3rem 0;color:var(--red);
 }
-.deal-desc{color:var(--gray);font-size:0.85rem;line-height:1.5;}
-.extras{
-  display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;
-  padding:1.2rem;background:white;border-radius:12px;
-  box-shadow:0 2px 12px var(--shadow);
+.deal-desc{color:var(--ink-light);font-size:0.85rem;}
+.deal-extras{
+  display:flex;gap:2rem;justify-content:center;margin-top:1.5rem;
+  padding:1.2rem;background:var(--white);border-radius:12px;box-shadow:var(--shadow);
 }
-.extra{text-align:center;}
-.extra .p{font-weight:800;font-size:1rem;}
-.extra .l{font-size:0.75rem;color:var(--gray);}
+.deal-extras .e{text-align:center;}
+.deal-extras .e .n{font-weight:700;font-size:1.1rem;}
+.deal-extras .e .l{font-size:0.75rem;color:var(--ink-light);}
 
 /* ─── LUNCH ─── */
-.lunch-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
-}
+.lunch-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
 @media(max-width:600px){.lunch-grid{grid-template-columns:1fr}}
 .lunch-card{
-  background:white;border-radius:16px;padding:2rem 1.5rem;text-align:center;
-  box-shadow:0 4px 20px var(--shadow);
-  border:2px solid transparent;
-  transition:all 0.25s;
+  background:var(--white);border-radius:16px;padding:2.5rem 2rem;text-align:center;
+  box-shadow:var(--shadow);border:2px solid transparent;transition:all 0.25s;
 }
 .lunch-card:hover{border-color:var(--red);}
 .lunch-num{
-  font-family:'DM Serif Display',serif;
-  font-size:4rem;line-height:0.8;
-  color:var(--red);
+  font-family:'Playfair Display',serif;
+  font-size:4rem;line-height:0.8;color:var(--red);
 }
-.lunch-desc{color:var(--gray);font-size:0.9rem;margin:1rem 0 1.2rem;line-height:1.5;}
-.lunch-price{
-  font-family:'DM Serif Display',serif;
+.lunch-desc{color:var(--ink-light);font-size:0.9rem;margin:1rem 0 1.5rem;line-height:1.5;}
+.lunch-p{
+  font-family:'Playfair Display',serif;
   font-size:2rem;color:var(--red);
   display:inline-block;padding:0.2rem 1.2rem;
-  background:var(--red-bg);border-radius:100px;
+  background:var(--red-light);border-radius:100px;
 }
-.lunch-up{text-align:center;margin-top:1rem;font-size:0.8rem;color:var(--gray);}
-.lunch-up strong{color:var(--ink);}
 
 /* ─── MENU LIST ─── */
-.menu-list{
+.menu-grid{
   display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
 }
-@media(max-width:700px){.menu-list{grid-template-columns:1fr}}
-.menu-col{
-  background:white;border-radius:16px;padding:1.5rem;
-  box-shadow:0 4px 20px var(--shadow);
+@media(max-width:700px){.menu-grid{grid-template-columns:1fr}}
+.menu-card{
+  background:var(--white);border-radius:16px;padding:1.5rem;
+  box-shadow:var(--shadow);
 }
-.menu-col h3{
-  font-family:'DM Serif Display',serif;
+.menu-card h3{
+  font-family:'Playfair Display',serif;
   font-size:1.2rem;margin-bottom:1rem;
   display:flex;align-items:center;gap:0.5rem;
 }
-.menu-col h3:after{content:'';flex:1;height:1px;background:var(--light-gray);}
-.row{
-  display:flex;justify-content:space-between;
-  padding:0.55rem 0;border-bottom:1px solid var(--red-bg);
-  font-size:0.9rem;
+.menu-card h3:after{content:'';flex:1;height:1px;background:var(--border);}
+.menu-row{
+  display:flex;justify-content:space-between;padding:0.55rem 0;
+  border-bottom:1px solid var(--red-light);font-size:0.9rem;
 }
-.row:last-child{border-bottom:none}
-.row .p{color:var(--gray);font-family:'DM Serif Display',serif;font-size:0.85rem;}
+.menu-row:last-child{border-bottom:none}
 .entree-item{
   display:flex;justify-content:space-between;align-items:center;
-  padding:0.7rem 1rem;
-  background:var(--warm);border-radius:10px;
-  font-size:0.9rem;margin-bottom:0.4rem;
+  padding:0.7rem 1rem;background:var(--bg);
+  border-radius:10px;font-size:0.9rem;margin-bottom:0.4rem;
 }
-.entree-item:last-child{margin-bottom:0;}
-.entree-item .p{color:var(--gray);font-family:'DM Serif Display',serif;font-size:0.85rem;white-space:nowrap;margin-left:0.5rem;}
+.entree-item .p{color:var(--ink-light);font-size:0.85rem;white-space:nowrap;margin-left:0.5rem;}
 
-/* ─── MUSIC PLAYER ─── */
+/* ─── LOCATION ─── */
+.location-wrap{
+  background:var(--white);border-radius:16px;overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.map-container{
+  width:100%;height:320px;border:none;
+}
+.location-info{
+  padding:2rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;
+}
+@media(max-width:600px){.location-info{grid-template-columns:1fr;gap:1rem;}}
+.info-block h4{font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-light);margin-bottom:0.4rem;}
+.info-block p{line-height:1.6;font-size:0.95rem;}
+.info-block a{color:var(--red);text-decoration:none;font-weight:600;}
+.info-block a:hover{text-decoration:underline;}
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.3rem 1rem;}
+.hours-grid .d{font-weight:600;font-size:0.85rem;}
+.hours-grid .t{color:var(--ink-light);font-size:0.85rem;}
+
+/* ─── MUSIC ─── */
 .music-section{
-  background:linear-gradient(180deg,var(--warm) 0%,var(--cream) 100%);
-  border-radius:20px;padding:2.5rem 2rem;
-  box-shadow:0 4px 20px var(--shadow);
+  background:var(--white);border-radius:20px;padding:2.5rem 2rem;
+  box-shadow:var(--shadow);
 }
-.music-section .section-title{color:var(--ink);}
-.player-box{
-  display:flex;align-items:center;gap:1rem;
-  background:white;border-radius:14px;padding:1rem 1.5rem;
-  box-shadow:0 2px 12px var(--shadow);
-  margin-bottom:1rem;
+.player-row{
+  display:flex;align-items:center;gap:1rem;padding:0.8rem 1rem;
+  border-radius:12px;transition:background 0.2s;cursor:pointer;
 }
-.player-box:last-child{margin-bottom:0;}
+.player-row:hover{background:var(--bg);}
+.player-row.active{background:var(--red-light);}
 .player-btn{
-  width:44px;height:44px;border-radius:50%;border:none;
-  background:var(--red);color:white;font-size:1.1rem;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
+  width:40px;height:40px;border-radius:50%;border:none;
+  background:var(--red);color:white;font-size:1rem;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;
   transition:transform 0.15s;
 }
 .player-btn:hover{transform:scale(1.08);}
-.player-btn.playing{background:var(--gold);color:var(--red-dark);}
+.player-btn.play{background:var(--gold);color:var(--ink);}
 .player-info{flex:1;min-width:0;}
-.player-info .title{font-weight:700;font-size:0.9rem;}
-.player-info .meta{font-size:0.75rem;color:var(--gray);margin-top:0.15rem;}
+.player-info .tt{font-weight:600;font-size:0.9rem;}
+.player-info .meta{font-size:0.75rem;color:var(--ink-light);}
 .player-bar{
-  width:100%;height:4px;
-  background:var(--light-gray);border-radius:4px;
-  margin-top:0.4rem;overflow:hidden;
+  width:100%;height:3px;background:var(--border);border-radius:4px;margin-top:0.3rem;
 }
-.player-bar-fill{
+.player-bar .fill{
   height:100%;background:var(--red);border-radius:4px;
   width:0%;transition:width 1s linear;
 }
-.player-bar-fill.active{background:var(--gold);}
-.player-time{
-  font-size:0.7rem;color:var(--gray);font-family:'DM Serif Display',serif;
-  flex-shrink:0;width:45px;text-align:right;
+.player-row.active .player-bar .fill{background:var(--gold);}
+.player-time{font-size:0.75rem;color:var(--ink-light);width:40px;text-align:right;}
+
+/* ─── MUSIC BAR ─── */
+.music-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:var(--ink);color:white;padding:0.75rem 2rem;
+  display:flex;align-items:center;gap:1rem;
+  transform:translateY(100%);transition:transform 0.3s;
+}
+.music-bar.show{transform:translateY(0);}
+.music-bar .btn{
+  width:36px;height:36px;border-radius:50%;border:none;
+  background:var(--gold);color:var(--ink);font-size:1rem;
+  cursor:pointer;flex-shrink:0;
+}
+.music-bar .info{flex:1;}
+.music-bar .info .t{font-weight:600;font-size:0.85rem;}
+.music-bar .info .s{font-size:0.7rem;color:rgba(255,255,255,0.5);}
+.music-bar .close{
+  background:none;border:none;color:rgba(255,255,255,0.4);
+  cursor:pointer;font-size:1.2rem;
 }
 
 /* ─── FOOTER ─── */
-.footer{
-  background:var(--ink);color:rgba(255,255,255,0.3);
-  text-align:center;padding:2.5rem 1.5rem;font-size:0.8rem;line-height:2;
+footer{
+  background:var(--ink);color:rgba(255,255,255,0.4);
+  text-align:center;padding:2.5rem 2rem;font-size:0.8rem;line-height:2;
+  margin-bottom:0;
 }
-.footer .brand{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--gold);}
-.footer .cn{color:rgba(240,179,75,0.5);}
+footer .b{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold);}
+footer .cn{color:rgba(214,158,60,0.4);}
 
 /* ─── REVEAL ─── */
-.reveal{opacity:0;transform:translateY(24px);transition:all 0.7s cubic-bezier(0.22,1,0.36,1);}
+.reveal{opacity:0;transform:translateY(20px);transition:all 0.7s cubic-bezier(0.22,1,0.36,1);}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
-/* ─── RESPONSIVE ─── */
 @media(max-width:480px){
-  .hero{min-height:85vh;}
-  .player-box{padding:0.8rem 1rem;}
+  nav{padding:0 1rem;}
+  .nav-links{display:none;}
+  .hero-left{padding:2rem 1.5rem;}
+  section{padding:3rem 1rem;}
 }
 </style>
 </head>
 <body>
 
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-brand">
+    <img src="assets/logo.jpg" alt="">
+    FONG YUNG
+  </div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="#music">Songs</a></li>
+  </ul>
+</nav>
+
 <!-- ═══ HERO ═══ -->
 <section class="hero">
-  <div class="hero-pattern"></div>
-  <div class="hero-content">
-    <div class="logo-wrap reveal"><img src="assets/logo.jpg" alt="FONG YUNG"></div>
-    <div class="hero-name reveal" style="transition-delay:0.1s">FONG YUNG</div>
-    <div class="hero-chinese reveal" style="transition-delay:0.15s">凤雍</div>
-    <div class="hero-tag reveal" style="transition-delay:0.2s">🍜 Chinese Takeaway</div>
-    <div class="hero-hours reveal" style="transition-delay:0.25s;line-height:1.6;">📍 Stafford City Shopping Centre<br>Shop e6/400 Stafford Rd, Stafford QLD 4053<br>🕐 Mon-Sat 9:30am · Sun 10:00am</div>
-    <a href="#menu" class="hero-cta reveal" style="transition-delay:0.3s">View Our Menu ↓</a>
+  <div class="hero-left">
+    <img src="assets/logo.jpg" alt="" class="hero-logo">
+    <div class="hero-name">FONG YUNG</div>
+    <div class="hero-chinese">凤雍 · Chinese Takeaway</div>
+    <p class="hero-desc">Real Chinese flavours, wok-fresh and made to order. Stafford's go-to for authentic takeaway since day one.</p>
+    <a href="#menu" class="hero-cta">Explore Our Menu ↓</a>
+  </div>
+  <div class="hero-right">
+    <img src="assets/lunch-combo.jpg" alt="FONG YUNG Lunch Combo">
+    <div class="hero-badge">
+      <div><div class="num">$13.50</div><div class="lbl">Regular Meal</div></div>
+      <div><div class="num">$16.50</div><div class="lbl">Large Meal</div></div>
+    </div>
   </div>
 </section>
 
 <!-- ═══ MENU ═══ -->
 <section id="menu">
-  <span class="section-label reveal">Fresh Daily</span>
-  <h2 class="section-title reveal">What We Serve</h2>
-  <p class="section-sub reveal">Real Chinese flavours, wok-fresh, made with ❤️</p>
+  <span class="section-label">Fresh Daily</span>
+  <h2 class="section-title">Our Menu</h2>
+  <p class="section-sub">Traditional flavours made fresh to order, 7 days a week.</p>
 
   <div class="menu-flyer">
-    <figure class="reveal"><img src="assets/all-day-meals.jpg" alt="All Day Meals" loading="lazy"><figcaption>🍚 All Day Meals</figcaption></figure>
-    <figure class="reveal" style="transition-delay:0.15s"><img src="assets/lunch-combo.jpg" alt="Lunch Combo" loading="lazy"><figcaption>🥡 Lunch Combo</figcaption></figure>
+    <figure><img src="assets/all-day-meals.jpg" alt="All Day Meals" loading="lazy"><figcaption>🍚 All Day Meals</figcaption></figure>
+    <figure><img src="assets/lunch-combo.jpg" alt="Lunch Combo" loading="lazy"><figcaption>🥡 Lunch Combo</figcaption></figure>
   </div>
 </section>
 
-<!-- ═══ ALL DAY ═══ -->
+<!-- ═══ PRICING ═══ -->
 <section>
-  <div class="deals reveal">
+  <div class="deals">
     <div class="deal-card">
       <div class="deal-name">Regular</div>
       <div class="deal-price">$13.50</div>
       <div class="deal-desc">2 choices · Rice or Noodles</div>
     </div>
     <div class="deal-card popular">
-      <span class="badge">★ Most Popular</span>
+      <span class="tag">★ Most Popular</span>
       <div class="deal-name">Large</div>
       <div class="deal-price">$16.50</div>
       <div class="deal-desc">3 choices · Rice or Noodles</div>
     </div>
   </div>
-
-  <div class="extras reveal">
-    <div class="extra"><div class="p">$8</div><div class="l">Fried Rice Only</div></div>
-    <div class="extra"><div class="p">$10</div><div class="l">Noodles Only</div></div>
-    <div class="extra"><div class="p">+$1</div><div class="l">No Rice/Noodles</div></div>
+  <div class="deal-extras">
+    <div class="e"><div class="n">$8</div><div class="l">Fried Rice Only</div></div>
+    <div class="e"><div class="n">$10</div><div class="l">Noodles Only</div></div>
+    <div class="e"><div class="n">+$1</div><div class="l">No Rice/Noodles</div></div>
   </div>
 </section>
 
 <!-- ═══ LUNCH COMBO ═══ -->
 <section>
-  <span class="section-label reveal">Lunch Special</span>
-  <h2 class="section-title reveal">Lunch Combo</h2>
-  <p class="section-sub reveal">Includes can drink or water</p>
-  <div class="lunch-grid reveal">
+  <span class="section-label">Lunch Special</span>
+  <h2 class="section-title">Lunch Combo</h2>
+  <p class="section-sub">Includes fried rice, spring roll or dim sim + can drink or water</p>
+  <div class="lunch-grid">
     <div class="lunch-card">
       <div class="lunch-num">2</div>
       <div class="lunch-desc">Choices + Fried Rice + Spring Roll + Drink</div>
-      <div class="lunch-price">$18.90</div>
+      <div class="lunch-p">$18.90</div>
     </div>
-    <div class="lunch-card" style="transition-delay:0.15s">
+    <div class="lunch-card">
       <div class="lunch-num">3</div>
       <div class="lunch-desc">Choices + Fried Rice + Dim Sim + Drink</div>
-      <div class="lunch-price">$20.90</div>
+      <div class="lunch-p">$20.90</div>
     </div>
   </div>
-  <div class="lunch-up reveal">Upgrade to bottled drink <strong>+$1.50</strong></div>
+  <p style="text-align:center;margin-top:1rem;font-size:0.85rem;color:var(--ink-light);">Upgrade to bottled drink <strong style="color:var(--ink);">+$1.50</strong></p>
 </section>
 
-<!-- ═══ MAIN SELECTION ═══ -->
+<!-- ═══ MENU LIST ═══ -->
 <section>
-  <span class="section-label reveal">Pick Your Flavours</span>
-  <h2 class="section-title reveal">Mains & Entrees</h2>
-  <p class="section-sub reveal">Mix & match your combo</p>
-  <div class="menu-list">
-    <div class="menu-col reveal">
+  <span class="section-label">Pick Your Flavours</span>
+  <h2 class="section-title">Mains & Entrees</h2>
+  <p class="section-sub">All available for your combo · Mix & match</p>
+  <div class="menu-grid">
+    <div class="menu-card">
       <h3>🍳 Mains</h3>
-      <div class="row"><span>Fried Rice</span></div>
-      <div class="row"><span>Honey Chicken</span></div>
-      <div class="row"><span>Sweet & Sour Pork</span></div>
-      <div class="row"><span>Teriyaki Chicken</span></div>
-      <div class="row"><span>Mongolian Beef</span></div>
-      <div class="row"><span>Chicken Vegetable</span></div>
-      <div class="row"><span>Omelette</span></div>
-      <div class="row"><span>Black Bean Beef</span></div>
-      <div class="row"><span>Chicken Chow Mein</span></div>
-      <div class="row"><span>Stir Fried Noodles</span></div>
+      <div class="menu-row"><span>Fried Rice</span></div>
+      <div class="menu-row"><span>Honey Chicken</span></div>
+      <div class="menu-row"><span>Sweet & Sour Pork</span></div>
+      <div class="menu-row"><span>Teriyaki Chicken</span></div>
+      <div class="menu-row"><span>Mongolian Beef</span></div>
+      <div class="menu-row"><span>Chicken Vegetable</span></div>
+      <div class="menu-row"><span>Omelette</span></div>
+      <div class="menu-row"><span>Black Bean Beef</span></div>
+      <div class="menu-row"><span>Chicken Chow Mein</span></div>
+      <div class="menu-row"><span>Stir Fried Noodles</span></div>
     </div>
-    <div class="menu-col reveal" style="transition-delay:0.12s">
+    <div class="menu-card">
       <h3>🥟 Entrees</h3>
       <div class="entree-item"><span>Spring Rolls</span><span class="p">1/$1.80 · 3/$5</span></div>
       <div class="entree-item"><span>Steam Dim Sim</span><span class="p">1/$2.20 · 3/$6.50</span></div>
@@ -378,119 +420,204 @@ section{padding:4rem 1.5rem;max-width:1000px;margin:0 auto;}
   </div>
 </section>
 
-<!-- ═══ MUSIC ═══ -->
-<section>
-  <div class="music-section">
-    <span class="section-label reveal">Original Music</span>
-    <h2 class="section-title reveal">🎵 The Fong Yung Anthem</h2>
-    <p class="section-sub reveal">Three tracks by Philip Wong · Tap to play</p>
-
-    <div class="player-box reveal">
-      <button class="player-btn" onclick="togglePlay(0)" id="play0">▶</button>
-      <div class="player-info">
-        <div class="title">01 · The Order Rap</div>
-        <div class="meta">Full menu walkthrough + order demo</div>
-        <div class="player-bar"><div class="player-bar-fill" id="bar0"></div></div>
+<!-- ═══ LOCATION ═══ -->
+<section id="location">
+  <span class="section-label">Visit Us</span>
+  <h2 class="section-title">Find FONG YUNG</h2>
+  <p class="section-sub">Come say hi — we're in Stafford City Shopping Centre</p>
+  <div class="location-wrap">
+    <iframe class="map-container"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3536.4!2d153.012!3d-27.410!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sShop%20e6%2F400%20Stafford%20Rd%2C%20Stafford%20QLD%204053!5e0!3m2!1sen!2sau!4v1"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+    <div class="location-info">
+      <div class="info-block">
+        <h4>📍 Address</h4>
+        <p>Stafford City Shopping Centre<br>Shop e6/400 Stafford Rd<br>Stafford QLD 4053</p>
       </div>
-      <div class="player-time" id="time0">1:30</div>
-    </div>
-
-    <div class="player-box reveal" style="transition-delay:0.1s">
-      <button class="player-btn" onclick="togglePlay(1)" id="play1">▶</button>
-      <div class="player-info">
-        <div class="title">02 · Fong Yung Theme</div>
-        <div class="meta">Brand anthem with the hook</div>
-        <div class="player-bar"><div class="player-bar-fill" id="bar1"></div></div>
+      <div class="info-block">
+        <h4>🕐 Trading Hours</h4>
+        <div class="hours-grid">
+          <span class="d">Mon-Fri</span><span class="t">9:30am – 8:00pm</span>
+          <span class="d">Saturday</span><span class="t">9:30am – 8:00pm</span>
+          <span class="d">Sunday</span><span class="t">10:00am – 6:00pm</span>
+        </div>
       </div>
-      <div class="player-time" id="time1">2:01</div>
-    </div>
-
-    <div class="player-box reveal" style="transition-delay:0.2s">
-      <button class="player-btn" onclick="togglePlay(2)" id="play2">▶</button>
-      <div class="player-info">
-        <div class="title">03 · Hot from the Wok</div>
-        <div class="meta">Short & catchy</div>
-        <div class="player-bar"><div class="player-bar-fill" id="bar2"></div></div>
-      </div>
-      <div class="player-time" id="time2">0:16</div>
     </div>
   </div>
 </section>
 
+<!-- ═══ MUSIC ═══ -->
+<section id="music">
+  <div class="music-section">
+    <span class="section-label">Original</span>
+    <h2 class="section-title">🎵 The Fong Yung Anthem</h2>
+    <p class="section-sub">Three tracks by Philip Wong</p>
+
+    <div class="player-row" onclick="playSong(0)">
+      <button class="player-btn" id="pb0">▶</button>
+      <div class="player-info">
+        <div class="tt">01 · The Order Rap</div>
+        <div class="meta">Full menu walkthrough — 1:30</div>
+        <div class="player-bar"><div class="fill" id="bar0"></div></div>
+      </div>
+      <div class="player-time" id="tm0">1:30</div>
+    </div>
+
+    <div class="player-row" onclick="playSong(1)">
+      <button class="player-btn" id="pb1">▶</button>
+      <div class="player-info">
+        <div class="tt">02 · Fong Yung Theme</div>
+        <div class="meta">Brand anthem — 2:01</div>
+        <div class="player-bar"><div class="fill" id="bar1"></div></div>
+      </div>
+      <div class="player-time" id="tm1">2:01</div>
+    </div>
+
+    <div class="player-row" onclick="playSong(2)">
+      <button class="player-btn" id="pb2">▶</button>
+      <div class="player-info">
+        <div class="tt">03 · Hot from the Wok</div>
+        <div class="meta">Short & catchy — 0:16</div>
+        <div class="player-bar"><div class="fill" id="bar2"></div></div>
+      </div>
+      <div class="player-time" id="tm2">0:16</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MUSIC BAR ═══ -->
+<div class="music-bar" id="musicBar">
+  <button class="btn" id="barBtn">▶</button>
+  <div class="info">
+    <div class="t" id="barTitle">Fong Yung Theme</div>
+    <div class="s" id="barMeta">Philip Wong</div>
+  </div>
+  <button class="close" onclick="closeBar()">✕</button>
+</div>
+
 <!-- ═══ FOOTER ═══ -->
-<footer class="footer">
-  <div class="brand">FONG YUNG</div>
+<footer>
+  <div class="b">FONG YUNG</div>
   <div class="cn">凤雍</div>
   <p>Chinese Takeaway</p>
   <p style="margin-top:0.5rem;">📍 Stafford City Shopping Centre · Shop e6/400 Stafford Rd, Stafford QLD 4053</p>
-  <p>🕐 Mon-Sat 9:30am · Sun 10:00am</p>
-  <p style="margin-top:0.5rem;">🎵 Songs by Philip Wong · Site by Daisy ❤️</p>
+  <p style="margin-top:0.5rem;">🎵 Original songs by Philip Wong · Site by Daisy</p>
 </footer>
 
 <script>
+// ─── AUDIO ───
 const songs = [
   'assets/song1.mp3',
   'assets/song2.mp3',
   'assets/song3.mp3'
 ];
+const titles = ['The Order Rap', 'Fong Yung Theme', 'Hot from the Wok'];
+const durations = [90, 121, 16];
 
 const audio = new Audio();
-let currentIdx = -1;
+audio.volume = 0.8;
+let cur = -1;
 
-function togglePlay(idx) {
-  if (currentIdx === idx && !audio.paused) {
+function playSong(i) {
+  document.querySelectorAll('.player-row').forEach(r => r.classList.remove('active'));
+  if (cur === i && !audio.paused) {
     audio.pause();
-    updateBtn(idx, false);
+    setBtn(i, false);
     return;
   }
-  if (currentIdx !== -1 && currentIdx !== idx) {
-    updateBtn(currentIdx, false);
-    document.getElementById('bar'+currentIdx).style.width = '0%';
+  if (cur !== -1 && cur !== i) {
+    setBtn(cur, false);
+    document.getElementById('bar'+cur).style.width = '0%';
+    document.getElementById('tm'+cur).textContent = formatTime(durations[cur]);
   }
-  if (currentIdx !== idx) {
-    audio.src = songs[idx];
+  if (cur !== i) {
+    audio.src = songs[i];
     audio.load();
-    currentIdx = idx;
+    cur = i;
   }
   audio.play().then(() => {
-    updateBtn(idx, true);
-  }).catch(e => {
-    // autoplay might be blocked
-    alert('Tap again to play - browser needs a user click first');
-  });
+    setBtn(i, true);
+    document.querySelectorAll('.player-row')[i].classList.add('active');
+    showBar(i);
+  }).catch(() => {});
 }
 
-function updateBtn(idx, playing) {
-  const btn = document.getElementById('play'+idx);
+function setBtn(i, playing) {
+  const btn = document.getElementById('pb'+i);
   btn.textContent = playing ? '⏸' : '▶';
-  btn.classList.toggle('playing', playing);
+  btn.className = 'player-btn' + (playing ? ' play' : '');
 }
 
 audio.addEventListener('timeupdate', () => {
-  if (currentIdx === -1) return;
+  if (cur < 0) return;
   const pct = (audio.currentTime / audio.duration) * 100;
-  document.getElementById('bar'+currentIdx).style.width = Math.min(pct, 100) + '%';
-  const remain = Math.max(0, audio.duration - audio.currentTime);
-  const mins = Math.floor(remain / 60);
-  const secs = Math.floor(remain % 60);
-  document.getElementById('time'+currentIdx).textContent = '-' + mins + ':' + String(secs).padStart(2,'0');
+  document.getElementById('bar'+cur).style.width = Math.min(pct, 100) + '%';
+  const r = audio.duration - audio.currentTime;
+  document.getElementById('tm'+cur).textContent = '-' + Math.floor(r/60) + ':' + String(Math.floor(r%60)).padStart(2,'0');
+  // Update bar
+  document.getElementById('barTitle').textContent = titles[cur];
+  document.getElementById('barBtn').textContent = '⏸';
 });
 
 audio.addEventListener('ended', () => {
-  if (currentIdx !== -1) {
-    updateBtn(currentIdx, false);
-    document.getElementById('bar'+currentIdx).style.width = '0%';
-    const durations = [90, 121, 16];
-    const t = durations[currentIdx];
-    document.getElementById('time'+currentIdx).textContent = Math.floor(t/60) + ':' + String(t%60).padStart(2,'0');
-    currentIdx = -1;
+  if (cur >= 0) {
+    setBtn(cur, false);
+    document.getElementById('bar'+cur).style.width = '0%';
+    document.getElementById('tm'+cur).textContent = formatTime(durations[cur]);
+    document.querySelectorAll('.player-row')[cur].classList.remove('active');
+    cur = -1;
+    document.getElementById('barBtn').textContent = '▶';
+    document.getElementById('musicBar').classList.remove('show');
   }
 });
 
-// Scroll reveal
+function formatTime(s) { return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); }
+
+// ─── MUSIC BAR ───
+function showBar(i) {
+  const bar = document.getElementById('musicBar');
+  document.getElementById('barTitle').textContent = titles[i];
+  document.getElementById('barMeta').textContent = 'Philip Wong';
+  document.getElementById('barBtn').textContent = '⏸';
+  bar.classList.add('show');
+}
+
+document.getElementById('barBtn').addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    document.getElementById('barBtn').textContent = '⏸';
+  } else {
+    audio.pause();
+    document.getElementById('barBtn').textContent = '▶';
+  }
+});
+
+function closeBar() {
+  audio.pause();
+  document.getElementById('musicBar').classList.remove('show');
+  if (cur >= 0) {
+    setBtn(cur, false);
+    document.getElementById('bar'+cur).style.width = '0%';
+    document.getElementById('tm'+cur).textContent = formatTime(durations[cur]);
+    document.querySelectorAll('.player-row')[cur].classList.remove('active');
+    cur = -1;
+  }
+}
+
+// Auto-play intro music on page load (user gesture required first)
+let introPlayed = false;
+document.addEventListener('click', () => {
+  if (!introPlayed) {
+    introPlayed = true;
+    // Autoplay the theme song on first click
+  }
+}, { once: true });
+
+// ─── SCROLL REVEAL ───
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+}, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
