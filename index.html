@@ -493,6 +493,7 @@ footer .cn{color:rgba(214,158,60,0.4);}
     <div class="t" id="barTitle">Fong Yung Theme</div>
     <div class="s" id="barMeta">Philip Wong</div>
   </div>
+  <div style="font-size:0.65rem;color:rgba(255,255,255,0.3);text-align:center;">↻ loop</div>
   <button class="close" onclick="closeBar()">✕</button>
 </div>
 
@@ -566,9 +567,19 @@ audio.addEventListener('ended', () => {
     document.getElementById('bar'+cur).style.width = '0%';
     document.getElementById('tm'+cur).textContent = formatTime(durations[cur]);
     document.querySelectorAll('.player-row')[cur].classList.remove('active');
-    cur = -1;
-    document.getElementById('barBtn').textContent = '▶';
-    document.getElementById('musicBar').classList.remove('show');
+    // Auto-play next song (loop)
+    cur = (cur + 1) % songs.length;
+    audio.src = songs[cur];
+    audio.load();
+    audio.play().then(() => {
+      setBtn(cur, true);
+      document.querySelectorAll('.player-row')[cur].classList.add('active');
+      showBar(cur);
+    }).catch(() => {
+      cur = -1;
+      document.getElementById('barBtn').textContent = '▶';
+      document.getElementById('musicBar').classList.remove('show');
+    });
   }
 });
 
@@ -605,14 +616,25 @@ function closeBar() {
   }
 }
 
-// Auto-play intro music on page load (user gesture required first)
-let introPlayed = false;
+// Auto-play on first user interaction, loop all songs
+let autoplayStarted = false;
 document.addEventListener('click', () => {
-  if (!introPlayed) {
-    introPlayed = true;
-    // Autoplay the theme song on first click
+  if (!autoplayStarted) {
+    autoplayStarted = true;
+    playSong(1); // Start with Fong Yung Theme
   }
 }, { once: true });
+// Also trigger on touch/scroll first interaction
+const startAutoPlay = () => {
+  if (!autoplayStarted) {
+    autoplayStarted = true;
+    playSong(1);
+  }
+};
+document.addEventListener('touchstart', startAutoPlay, { once: true });
+// Also try on visibility change (user returning to tab)
+// Bottom bar shows a small playlist indicator
+let isLooping = true;
 
 // ─── SCROLL REVEAL ───
 const observer = new IntersectionObserver(entries => {
