@@ -26,6 +26,34 @@ body{
   overflow-x:hidden;
 }
 
+/* ─── SPLASH OVERLAY (triggers autoplay on mobile) ─── */
+.splash{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:2rem;
+  cursor:pointer;transition:opacity 0.6s,visibility 0.6s;
+}
+.splash.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+.splash img{
+  width:120px;height:120px;border-radius:50%;
+  border:3px solid var(--gold);margin-bottom:1.5rem;
+}
+.splash h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,6vw,4rem);color:var(--gold);
+}
+.splash p{
+  color:rgba(255,255,255,0.5);font-size:0.85rem;
+  margin-top:1rem;max-width:280px;line-height:1.6;
+}
+.splash .tap{
+  margin-top:2rem;
+  animation:pulse 2s ease-in-out infinite;
+  color:var(--gold);font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;
+}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+
 /* ─── NAV ─── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
@@ -304,6 +332,14 @@ footer .cn{color:rgba(214,158,60,0.4);}
 </style>
 </head>
 <body>
+
+<!-- ═══ SPLASH OVERLAY ═══ -->
+<div class="splash" id="splash" onclick="startAutoplay()">
+  <img src="assets/logo.jpg" alt="FONG YUNG">
+  <h1>FONG YUNG</h1>
+  <p>Tap anywhere to enter with music 🎵</p>
+  <div class="tap">👆 Tap to start</div>
+</div>
 
 <!-- ═══ NAV ═══ -->
 <nav>
@@ -616,25 +652,15 @@ function closeBar() {
   }
 }
 
-// Auto-play on first user interaction, loop all songs
+// ─── AUTOPLAY ───
 let autoplayStarted = false;
-document.addEventListener('click', () => {
-  if (!autoplayStarted) {
-    autoplayStarted = true;
-    playSong(1); // Start with Fong Yung Theme
-  }
-}, { once: true });
-// Also trigger on touch/scroll first interaction
-const startAutoPlay = () => {
-  if (!autoplayStarted) {
-    autoplayStarted = true;
-    playSong(1);
-  }
-};
-document.addEventListener('touchstart', startAutoPlay, { once: true });
-// Also try on visibility change (user returning to tab)
-// Bottom bar shows a small playlist indicator
-let isLooping = true;
+
+function startAutoplay() {
+  if (autoplayStarted) return;
+  autoplayStarted = true;
+  document.getElementById('splash').classList.add('hidden');
+  playSong(1); // Start with Fong Yung Theme
+}
 
 // ─── SCROLL REVEAL ───
 const observer = new IntersectionObserver(entries => {
